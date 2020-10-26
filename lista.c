@@ -27,3 +27,43 @@ void imprimir_lista(Lista* l) {
         printf("%d\n", p->info);
     }
 }
+
+int vazia(Lista* l) {
+    if (l == NULL) {
+        return 1;
+    }
+        return 0; 
+}
+
+Lista* buscar(Lista* l, int v) {
+    Lista* p;
+    for(p = l; p != NULL; p = p->prox) {
+        if (p->info == v) {
+            return p;
+        } 
+    }
+    return NULL;
+}
+
+Lista* remover(Lista* l, int v) {
+    Lista* ant = NULL; //Ponteiro para o elemento anterior
+    Lista* p = l; // Ponteiro para percorrer a lista
+    while (p != NULL && p->info != v) {
+        ant = p;
+        p = p->prox;
+    }
+
+    if (p == NULL) {
+        return l;
+    } 
+    
+    if (ant == NULL) {
+        // Remove do inicio da lista
+        l = p->prox;
+    } else {
+        // Remove do meio da lista
+        ant->prox = p->prox;
+    }
+    free(p);
+    return l;
+}
